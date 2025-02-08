@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -22,18 +25,21 @@ class HomeController extends Controller
     public function index()
     {
         $userInfo = Auth::user();
-        if($userInfo->user_type =='admin'){
+        if ($userInfo->user_type == 'admin') {
             return redirect(route('adminDashboard'));
-        }elseif($userInfo->user_type=='merchant'){
+        } elseif ($userInfo->user_type == 'merchant') {
             return redirect(route('merchantDashboard'));
-        } 
+        }
     }
 
-    public function adminDashboard(){ 
-        return view('dashboard.adminDashboard');
+    public function adminDashboard()
+    {
+        $merchants = User::where('user_type', 'merchant')->get();
+        return view('dashboard.adminDashboard', compact('merchants'));
     }
 
-    public function merchantDashboard(){ 
+    public function merchantDashboard()
+    {
         return view('dashboard.merchantDashboard');
     }
 }
