@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use App\Models\Store;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,11 +23,15 @@ class TenatMiddleware
         if (Auth::check()) {
             $user = Auth::user();
             $tenantId = $user->id;
-            // if ($user->user_type == 'merchant') {
+           
                 app()->singleton('tenant_id', fn() => $tenantId);
-            // }
+            
 
             Store::addGlobalScope('tenant_id', function (Builder $builder) use ($tenantId) {
+                $builder->where('tenant_id', $tenantId);
+            });
+
+            Category::addGlobalScope('tenant_id', function (Builder $builder) use ($tenantId) {
                 $builder->where('tenant_id', $tenantId);
             });
         }

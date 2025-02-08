@@ -14,7 +14,7 @@
                         <div class="col-md-12">
                             <label for="store_name">Store Name</label>
                             <input type="text" class="form-control" id="store_name" name="store_name"
-                                placeholder="Enter store name" required>
+                                placeholder="" required>
                             @if ($errors->has('store_name'))
                                 <span class="form-text">
                                     <strong class="text-danger form-control-sm">{{ $errors->first('store_name') }}</strong>

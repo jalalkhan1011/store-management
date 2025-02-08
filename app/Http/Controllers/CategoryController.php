@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Store;
 use Illuminate\Http\Request;
 
-class StoreController extends Controller
+class CategoryController extends Controller
 {
     public function __construct()
     {
@@ -16,9 +17,9 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = Store::all();
+        $categories = Category::all();
 
-        return view('admin.merchant.store.index', compact('stores'));
+        return view('admin.merchant.category.index',compact('categories'));
     }
 
     /**
@@ -26,7 +27,9 @@ class StoreController extends Controller
      */
     public function create()
     {
-        return view('admin.merchant.store.create');
+        $stores = Store::where('tenant_id',auth()->user()->id)->pluck('store_name', 'id');
+        
+        return view('admin.merchant.category.create',compact('stores'));
     }
 
     /**
@@ -35,23 +38,25 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'store_name'=>'required'
+            'category_name'=>'required',
+            'store_id'=>'required'
         ]);
 
-        $data=[
-            'store_name'=>$request->store_name,
+        $data =[
+            'category_name'=>$request->category_name,
+            'store_id'=>$request->store_id,
             'tenant_id'=>auth()->user()->id
         ];
 
-        Store::create($data);
+        Category::create($data);
 
-        return redirect(route('storeList'))->with('success','Store created successfully');
+        return redirect(route('categoryList'))->with('success','Category created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Store $store)
+    public function show(Category $category)
     {
         //
     }
@@ -59,7 +64,7 @@ class StoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Store $store)
+    public function edit(Category $category)
     {
         //
     }
@@ -67,7 +72,7 @@ class StoreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Store $store)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -75,7 +80,7 @@ class StoreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Store $store)
+    public function destroy(Category $category)
     {
         //
     }

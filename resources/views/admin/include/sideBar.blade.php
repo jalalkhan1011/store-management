@@ -18,6 +18,18 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('createStore') }}">
                 <span>Create Store</span></a>
+        </li> 
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('categoryList') }}">
+                <span>Category List</span></a>
+        </li>
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('createCategory') }}">
+                <span>Create Category</span></a>
         </li>
         <hr class="sidebar-divider">
     </ul>
