@@ -6,7 +6,7 @@
         <div class="col-lg-4 mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">Store List</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Show Store List</h6>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">

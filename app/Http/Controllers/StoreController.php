@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $stores = Store::all();
+
+        return view('admin.merchant.store.index', compact('stores'));
     }
 
     /**
@@ -20,7 +26,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.merchant.store.create');
     }
 
     /**

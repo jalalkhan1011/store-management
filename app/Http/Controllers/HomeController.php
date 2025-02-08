@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,6 +41,8 @@ class HomeController extends Controller
 
     public function merchantDashboard()
     {
-        return view('dashboard.merchantDashboard');
+        $stores = Store::all();
+
+        return view('dashboard.merchantDashboard',compact('stores'));
     }
 }
