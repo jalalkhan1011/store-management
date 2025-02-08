@@ -53,7 +53,7 @@ class LoginController extends Controller
             $userInfo = Auth::user();
             if ($userInfo->user_type == 'admin') {
                 if ($userInfo->user_type == 'admin' && $request->admin == 'admin') {
-                    return redirect()->intended('admin/dashboard')
+                    return redirect()->intended(route('adminDashboard'))
                         ->withSuccess('You have successfully logged in as Admin');
                 } else {
                     Auth::logout();
@@ -61,7 +61,7 @@ class LoginController extends Controller
                 }
             } elseif ($userInfo->user_type == 'merchant') {
                 if ($userInfo->user_type == 'merchant' && $request->merchant == 'merchant') {
-                    return redirect()->intended('merchant/dashboard')
+                    return redirect()->intended(route('merchantDashboard'))
                         ->withSuccess('You have successfully logged in as Merchant');
                 } else {
                     Auth::logout();

@@ -23,10 +23,17 @@ class HomeController extends Controller
     {
         $userInfo = Auth::user();
         if($userInfo->user_type =='admin'){
-            dd('admin');
+            return redirect(route('adminDashboard'));
         }elseif($userInfo->user_type=='merchant'){
-            dd('merchant');
-        }
-        return view('home');
+            return redirect(route('merchantDashboard'));
+        } 
+    }
+
+    public function adminDashboard(){ 
+        return view('dashboard.adminDashboard');
+    }
+
+    public function merchantDashboard(){ 
+        return view('dashboard.merchantDashboard');
     }
 }
