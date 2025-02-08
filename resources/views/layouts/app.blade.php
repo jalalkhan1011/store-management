@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @stack('css')
 </head>
 <body>
     <div id="app">
@@ -76,5 +77,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    @stack('js')
 </body>
 </html>

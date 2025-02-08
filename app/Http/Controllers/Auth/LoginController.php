@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,38 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+    }
+
+    public function customLogin(Request $request)
+    {
+
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $userInfo = Auth::user();
+            if ($userInfo->user_type == 'admin') {
+                if ($userInfo->user_type == 'admin' && $request->admin == 'admin') {
+                    return redirect()->intended('admin/dashboard')
+                        ->withSuccess('You have successfully logged in as Admin');
+                } else {
+                    Auth::logout();
+                    return redirect("login")->withSuccess('Login details are not valid');
+                }
+            } elseif ($userInfo->user_type == 'merchant') {
+                if ($userInfo->user_type == 'merchant' && $request->merchant == 'merchant') {
+                    return redirect()->intended('merchant/dashboard')
+                        ->withSuccess('You have successfully logged in as Merchant');
+                } else {
+                    Auth::logout();
+                    return redirect("login")->withSuccess('Login details are not valid');
+                }
+            }
+        }
+
+        return redirect("login")->withSuccess('Login details are not valid');
     }
 }
