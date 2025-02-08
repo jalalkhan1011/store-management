@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Store;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,6 +33,10 @@ class TenatMiddleware
             });
 
             Category::addGlobalScope('tenant_id', function (Builder $builder) use ($tenantId) {
+                $builder->where('tenant_id', $tenantId);
+            });
+
+            Product::addGlobalScope('tenant_id', function (Builder $builder) use ($tenantId) {
                 $builder->where('tenant_id', $tenantId);
             });
         }

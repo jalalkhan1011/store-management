@@ -31,6 +31,18 @@
             <a class="nav-link" href="{{ route('createCategory') }}">
                 <span>Create Category</span></a>
         </li>
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('productList') }}">
+                <span>Product List</span></a>
+        </li>
+        <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('createProduct') }}">
+                <span>Create Product</span></a>
+        </li>
         <hr class="sidebar-divider">
     </ul>
 @endif

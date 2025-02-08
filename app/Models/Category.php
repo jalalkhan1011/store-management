@@ -11,10 +11,15 @@ class Category extends Model
     public function store()
     {
         return $this->belongsTo(Store::class, 'store_id');
-    } 
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_id');
+    }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'tenant_id','id');
+        return $this->belongsTo(User::class, 'tenant_id', 'id');
     }
 }
